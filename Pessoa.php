@@ -59,5 +59,10 @@ class Pessoa
     public function atualizarDados($id, $nome, $telefone, $email)
     {
         $cmd = $this->pdo->prepare("UPDATE pessoa SET nome = :n, telefone = :t, email = :e WHERE id = :id");
+        $cmd->bindValue(":n", $nome);
+        $cmd->bindValue(":t", $telefone);
+        $cmd->bindValue(":e", $email);
+        $cmd->bindValue(":id", $id);
+        $cmd->execute();
     }
 }
