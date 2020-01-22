@@ -13,16 +13,33 @@ $p = new Pessoa("crudpdo", "localhost", "root", "");
 
 <body>
     <?php
-    if (isset($_POST['nome'])) {
-        $nome = addslashes($_POST['nome']);
-        $telefone = addslashes($_POST['telefone']);
-        $email = addslashes($_POST['email']);
-        if (!empty($nome) && !empty($telefone) && !empty($email)) {
-            if (!$p->cadastrarPessoa($nome, $telefone, $email)) {
-                echo "Conta de email já cadastrado";
+    if (isset($_POST['nome']))
+    //informa se clicou no botao cadastrar ou atualizar
+    {
+        //--------------------------EDITAR-------------------------
+        if (isset($_GET['id_up']) && !empty($_GET['id_up'])) {
+            $id_upd = addslashes($_GET['id_up']);
+            $nome = addslashes($_POST['nome']);
+            $telefone = addslashes($_POST['telefone']);
+            $email = addslashes($_POST['email']);
+            if (!empty($nome) && !empty($telefone) && !empty($email)) {
+                $p->atualizarDados($id_upd, $nome, $telefone, $email);
+            } else {
+                echo "Preencha todos os campos";
             }
-        } else {
-            echo "Preencha todos os campos";
+        }
+        //--------------------------CADASTRAR---------------------
+        else {
+            $nome = addslashes($_POST['nome']);
+            $telefone = addslashes($_POST['telefone']);
+            $email = addslashes($_POST['email']);
+            if (!empty($nome) && !empty($telefone) && !empty($email)) {
+                if (!$p->cadastrarPessoa($nome, $telefone, $email)) {
+                    echo "Conta de email já cadastrado";
+                }
+            } else {
+                echo "Preencha todos os campos";
+            }
         }
     }
     ?>
