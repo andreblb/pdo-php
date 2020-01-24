@@ -27,6 +27,7 @@ $p = new Pessoa("crudpdo", "localhost", "root", "");
             } else {
                 echo "Preencha todos os campos";
             }
+            header("location:index.php");
         }
         //--------------------------CADASTRAR---------------------
         else {
@@ -40,6 +41,7 @@ $p = new Pessoa("crudpdo", "localhost", "root", "");
             } else {
                 echo "Preencha todos os campos";
             }
+            header("location:index.php");
         }
     }
     ?>
